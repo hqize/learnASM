@@ -1,0 +1,44 @@
+DATA SEGMENT
+    MSG_INPUT DB 'Enter a character: $'
+    MSG_OUTPUT DB 09H,'Output: $'
+DATA ENDS
+CODE SEGMENT
+    ASSUME CS:CODE, DS:DATA
+START:
+    MOV AX,DATA
+    MOV DS,AX
+CH_INPUT:
+    LEA DX,MSG_INPUT
+    MOV AH,09H
+    INT 21H
+
+    MOV AH,01H
+    INT 21H
+
+    CMP AL,0DH
+    JE EXIT
+
+    LEA DX,MSG_OUTPUT
+    MOV AH,09H
+    INT 21H
+
+    MOV DL,AL
+    MOV AH,02H  
+    INT 21H
+
+    ;回车
+    MOV DL,0DH
+    MOV AH,02H
+    INT 21H
+    ;换行
+    MOV DL,0AH
+    MOV AH,02H
+    INT 21H
+
+    JMP CH_INPUT
+
+EXIT:
+    MOV AH,4CH
+    INT 21H
+CODE ENDS
+     END START
