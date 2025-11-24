@@ -4,10 +4,10 @@ START:
     MOV BX,0FB32H 
     MOV CX,4    ;循环次数，4次
 SHIFT:          ;循环左移四位
-    ROL BX,1
-    ROL BX,1
-    ROL BX,1
-    ROL BX,1
+    PUSH CX
+    MOV CL,4
+    ROL BX,CL
+    POP CX
 
     MOV AL,BL
     AND AL,0FH  ;按位与，取低四位

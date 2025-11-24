@@ -1,5 +1,5 @@
 Data segment
-String db 'I love China!$'
+    String db 'I love China!$'
 Data ends
 code segment
 assume cs:code,ds:data
